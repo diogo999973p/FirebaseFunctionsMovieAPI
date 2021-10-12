@@ -1,40 +1,19 @@
 
-# Simple Movie API
-This is one of the simplest APIs written in the **API Blueprint**. One plain
-resource combined with a method and that's it! We will explain what is going on
-in the next installment - 
-[Resource and Actions](02.%20Resource%20and%20Actions.md).
+# API de Filmes
 
-**Note:** As we progress through the examples, do not also forget to view the
-[Raw](https://raw.github.com/apiaryio/api-blueprint/master/examples/01.%20Simplest%20API.md)
-code to see what is really going on in the API Blueprint, as opposed to just
-seeing the output of the Github Markdown parser.
+Essa é uma API de filmes construída através da utilização de Firebase Functions.
+Essa ferramenta possibilita a criação de endpoints através do uso do framework 
+Express para Node JS.
 
-Also please keep in mind that every single example in this course is a **real
-API Blueprint** and as such you can **parse** it with the 
-[API Blueprint parser](https://github.com/apiaryio/drafter) or one of its
-[bindings](https://github.com/apiaryio/drafter#bindings).
+# Recurso
 
-## API Blueprint
-+ [This: Raw API Blueprint](https://raw.github.com/apiaryio/api-blueprint/master/examples/01.%20Simplest%20API.md)
-+ [Next: Resource and Actions](02.%20Resource%20and%20Actions.md)
+O endpoint base utilizado é:
 
-# GET /message
-+ Response 200 (text/plain)
+https://us-central1-testedgb01.cloudfunctions.net/api/movies
 
- 
+## API
 
-FORMAT: 1A
-
-# Resource and Actions API
-This API example demonstrates how to define a resource with multiple actions.
-
-## API Blueprint
-+ [Previous: The Simplest API](01.%20Simplest%20API.md)
-+ [This: Raw API Blueprint](https://raw.github.com/apiaryio/api-blueprint/master/examples/02.%20Resource%20and%20Actions.md)
-+ [Next: Named Resource and Actions](03.%20Named%20Resource%20and%20Actions.md)
-
-# /message
+# /movies
 This is our [resource](http://www.w3.org/TR/di-gloss/#def-resource). It is
 defined by its
 [URI](http://www.w3.org/TR/di-gloss/#def-uniform-resource-identifier) or, more

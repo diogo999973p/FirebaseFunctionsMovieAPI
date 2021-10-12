@@ -2,8 +2,7 @@
 # API de Filmes
 
 Essa é uma API de filmes construída através da utilização de Firebase Functions.
-Essa ferramenta possibilita a criação de endpoints através do uso do framework 
-Express para Node JS.
+Essa ferramenta em conjunto com o framework Express (Node) possibilita a criação de endpoints. 
 
 # Recurso
 

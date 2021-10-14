@@ -20,8 +20,7 @@ Esse recurso é acessado por
 https://us-central1-testedgb01.cloudfunctions.net/api/movies
 
 Ele retorna todos os filmes cadastrados no sistema, isto é, ele retorna 
-todos os dados carregados no banco de dados Firestore do Firebase até então inseridos
-pelo método POST.
+todos os dados carregados anteriormente no banco de dados Firestore do Firebase.
 
 Exemplo:
 
@@ -56,9 +55,9 @@ Esse recurso é acessado por
 
 https://us-central1-testedgb01.cloudfunctions.net/api/movies/find/{movie}
 
-em que {movie} pode ser substituido pelo nome de um filme. 
+em que {movie} pode ser substituído pelo nome de um filme. 
 
-Ele retorna um filme somente se um filme com exatamente a mesma string de {movie} é encontrada na base de dados.
+Ele retorna informações somente se for encontrado no banco de dados um filme com nome idêntico a string passada no endpoint.
 
 Exemplo:
 

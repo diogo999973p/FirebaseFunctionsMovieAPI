@@ -198,5 +198,5 @@ Ele pode ser utilizado inserindo no body da requisição, por exemplo, o seguint
 + Response
         
         {
-                "message": 'added a movie'
+                "message": "added a movie"
         }

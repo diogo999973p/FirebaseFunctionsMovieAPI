@@ -3,145 +3,201 @@
 
 Essa é uma API de filmes construída através da utilização de Firebase Functions.
 Essa ferramenta em conjunto com o framework Express (Node) possibilita a criação de endpoints. 
+Uma base de dados Firebase Firestore foi empregada para armazenar informações.
 
-# Recurso
+# API
 
-O endpoint base utilizado é:
+## Recurso Base
+
+A URL base dos endpoints é
+
+https://us-central1-testedgb01.cloudfunctions.net/api
+
+## GET /movies
+
+Esse recurso é acessado por
 
 https://us-central1-testedgb01.cloudfunctions.net/api/movies
 
-## API
+Ele retorna todos os filmes cadastrados no sistema, isto é, ele retorna 
+todos os dados carregados no banco de dados Firestore do Firebase até então inseridos
+pelo método POST.
 
-# /movies
-This is our [resource](http://www.w3.org/TR/di-gloss/#def-resource). It is
-defined by its
-[URI](http://www.w3.org/TR/di-gloss/#def-uniform-resource-identifier) or, more
-precisely, by its [URI Template](http://tools.ietf.org/html/rfc6570).
+Exemplo:
 
-This resource has no actions specified but we will fix that soon.
++ Requisição
+        
+        https://us-central1-testedgb01.cloudfunctions.net/api/movies
 
-## GET
-Here we define an action using the `GET` [HTTP request method](http://www.w3schools.com/tags/ref_httpmethods.asp) for our resource `/message`.
 
-As with every good action it should return a
-[response](http://www.w3.org/TR/di-gloss/#def-http-response). A response always
-bears a status code. Code 200 is great as it means all is green. Responding
-with some data can be a great idea as well so let's add a plain text message to
-our response.
++ Resposta
 
-+ Response 200 (text/plain)
+        [
+        {
+                "id": "30zVx2yn6wmtFvVZgIeo",
+                "name": "The Lord of the Rings: The Return of the King",
+                "release": 2003,
+                "synopsis": "Gandalf e Aragorn lideram o Mundo dos Homens contra o exército de Sauron para desviar o olhar de Frodo e Sam quando eles se aproximam á Montanha da Perdição com o Um Anel.",
+                "rating": 8.9
+        },
+        {
+                "id": "6ovMbO08336dPv3Cave3",
+                "name": "Harry Potter and the Sorcerer's Stone",
+                "release": 2001,
+                "synopsis": "Uma criança órfã se enrolla em uma escola de magia, onde ele aprende a verdade sobre si mesmo, sua família e o terrível mal que se esconde no mundo mágico.",
+                "rating": 7.6
+        },
+        ...
+        ]
 
-        Hello World!
+## GET /movies/find/{movie}
 
-## PUT
-OK, let's add another action. This time to put new data to our resource
-(essentially an update action). We will need to send something in a
-[request](http://www.w3.org/TR/di-gloss/#def-http-request) and then send a
-response back confirming the posting was a success (_HTTP Status Code 204 ~
-Resource updated successfully, no content is returned_).
+Esse recurso é acessado por
 
-+ Request (text/plain)
+https://us-central1-testedgb01.cloudfunctions.net/api/movies/find/{movie}
 
-        All your base are belong to us.
+em que {movie} pode ser substituido pelo nome de um filme. 
 
-+ Response 204
+Ele retorna um filme somente se um filme com exatamente a mesma string de {movie} é encontrada na base de dados.
 
+Exemplo:
+
++ Requisição
+
+        https://us-central1-testedgb01.cloudfunctions.net/api/movies/find/The Matrix
+        
+
++ Resposta
+
+        {
+                "id": "JLoY0aKALiTkAw3Ehmav",
+                "name": "The Matrix",
+                "release": 1999,
+                "synopsis": "Um hacker aprende com os misteriosos rebeldes sobre a verdadeira natureza de sua realidade e seu papel na guerra contra seus controladores.",
+                "rating": 8.7
+        }
+        
+## GET /movies/search/{movie}
+
+Esse recurso é acessado por
+
+https://us-central1-testedgb01.cloudfunctions.net/api/movies/search/{movie}
+
+em que {movie} pode ser substituido por uma string qualquer.
+
+Ele retorna todos os filmes da base de dados que contém a string passada no endpoint.
+
+Exemplo:
+
++ Requisição
+        
+        https://us-central1-testedgb01.cloudfunctions.net/api/movies/find/The Matrix
+
+
++ Resposta
+
+        [
+        {
+                "id": "7JhNUzGf99hyS7EPYFqN",
+                "name": "The Matrix Revolutions",
+                "release": 2003,
+                "synopsis": "Zion se defende contra a invasão das máquinas enquanto Neo luta em outra frente dessa mesma guerra.",
+                "rating": 6.8
+        },
+        {
+                "id": "8ys5vjpvI8erTDZZAOra",
+                "name": "The Matrix Reloaded",
+                "release": 2003,
+                "synopsis": "Seguindo os eventos de Matrix, Neo e os líderes rebeldes acham que tem só 72 houras antes que Zion seja descoberto e destroido. Neo deberá decidir como salvar á Trinity de seus sonhos.",
+                "rating": 7.2
+        },
+        {
+                "id": "JLoY0aKALiTkAw3Ehmav",
+                "name": "The Matrix",
+                "release": 1999,
+                "synopsis": "Um hacker aprende com os misteriosos rebeldes sobre a verdadeira natureza de sua realidade e seu papel na guerra contra seus controladores.",
+                "rating": 8.7
+        }
+        ]
+
+## GET /movies/top5
+
+Esse recurso é acessado por
+
+https://us-central1-testedgb01.cloudfunctions.net/api/movies/top5
+
+Ele retorna informações de cinco filmes com maiores notas e em ordem decrescente.
+
+Exemplo:
+
++ Requisição
+        
+        https://us-central1-testedgb01.cloudfunctions.net/api/movies/top5
+        
+
++ Resposta
+
+        [
+        {
+                "id": "30zVx2yn6wmtFvVZgIeo",
+                "name": "The Lord of the Rings: The Return of the King",
+                "release": 2003,
+                "synopsis": "Gandalf e Aragorn lideram o Mundo dos Homens contra o exército de Sauron para desviar o olhar de Frodo e Sam quando eles se aproximam á Montanha da Perdição com o Um Anel.",
+                "rating": 8.9
+        },
+        {
+                "id": "meVr693ci0V9KXQI3Sc3",
+                "name": "The Lord of the Rings: The Fellowship of the Ring",
+                "release": 2001,
+                "synopsis": "Um manso hobbit do Condado e oito companheiros partem em uma jornada para destruir o poderoso Um Anel e salvar a Terra-média das Trevas.",
+                "rating": 8.8
+        },
+        {
+                "id": "JLoY0aKALiTkAw3Ehmav",
+                "name": "The Matrix",
+                "release": 1999,
+                "synopsis": "Um hacker aprende com os misteriosos rebeldes sobre a verdadeira natureza de sua realidade e seu papel na guerra contra seus controladores.",
+                "rating": 8.7
+        },
+        {
+                "id": "ScXTTfNUX1WEauMt39GU",
+                "name": "The Lord of the Rings: The Two Towers",
+                "release": 2002,
+                "synopsis": "Enquanto Frodo e Sam estão perto de Mordor com a ajuda de Gollum, a divida comunhão luta contra Saruman e os Isengards.",
+                "rating": 8.7
+        },
+        {
+                "id": "eJsf2SJWVQQcyi62keoT",
+                "name": "Harry Potter and the Prisoner of Azkaban",
+                "release": 2004,
+                "synopsis": "Harry está prestes a começar o seu terceiro ano em Hogwarts quando o terrível assassino Sirius Black, um aliado de Voldemort, foge da prisão de Azkaban. Apesar da vigilância, Harry sabe que, cedo ou tarde, Black virá ao seu encontro.",
+                "rating": 7.9
+        }
+        ]
+
+
+## POST /movies
+
+Esse recurso permite inserir um filme no sistema, pelo endpoint
+
+https://us-central1-testedgb01.cloudfunctions.net/api/movies
+
+Ele pode ser utilizado inserindo no body da requisição, por exemplo, o seguinte JSON:
+
++ Body
+        
+        {
+                "id": "30zVx2yn6wmtFvVZgIeo",
+                "name": "The Lord of the Rings: The Return of the King",
+                "release": 2003,
+                "synopsis": "Gandalf e Aragorn lideram o Mundo dos Homens contra o exército de Sauron para desviar o olhar de Frodo e Sam quando eles se aproximam á Montanha da Perdição com o Um Anel.",
+                "rating": 8.9
+        }
+        
+ No caso de sucesso da requisição, a resposta é
  
-
-
-FORMAT: 1A
-
-# JSON Schema
-Every request and response can have a schema. Below you will find examples
-using [JSON Schema](http://json-schema.org/) to describe the format of request
-and response body content.
-
-## API Blueprint
-+ [Previous: Named Endpoints](13.%20Named%20Endpoints.md)
-+ [This: Raw API Blueprint](https://raw.github.com/apiaryio/api-blueprint/master/examples/14.%20JSON%20Schema.md)
-+ [Next: Advanced JSON Schema](15.%20Advanced%20JSON%20Schema.md)
-
-# Notes [/notes/{id}]
-
-+ Parameters
-
-    + id: abc123 (required) - Unique identifier for a note
-
-## Get a note [GET]
-Gets a single note by its unique identifier.
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "id": "abc123",
-                "title": "This is a note",
-                "content": "This is the note content."
-                "tags": [
-                    "todo",
-                    "home"
-                ]
-            }
-
-    + Schema
-
-            {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "content": {
-                        "type": "string"
-                    },
-                    "tags": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-
-## Update a note [PATCH]
-Modify a note's data using its unique identifier. You can edit the `title`,
-`content`, and `tags`.
-
-+ Request (application/json)
-
-    + Body
-
-            {
-                "title": "This is another note",
-                "tags": [
-                    "todo",
-                    "work"
-                ]
-            }
-
-    + Schema
-
-            {
-                "type": "object",
-                "properties": {
-                    "title": {
-                        "type": "string"
-                    },
-                    "content": {
-                        "type": "string"
-                    },
-                    "tags": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "additionalProperties": false
-            }
-
-+ Response 204
++ Response
+        
+        {
+                "message": 'added a movie'
+        }

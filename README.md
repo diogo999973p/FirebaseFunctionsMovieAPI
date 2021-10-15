@@ -90,7 +90,7 @@ Exemplo:
 
 + Requisição
         
-        https://us-central1-testedgb01.cloudfunctions.net/api/movies/find/The Matrix
+        https://us-central1-testedgb01.cloudfunctions.net/api/movies/search/The Matrix
 
 
 + Resposta
